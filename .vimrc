@@ -129,6 +129,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+Plug 'jvirtanen/vim-hcl'
 Plug 'lifepillar/pgsql.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
@@ -459,7 +460,11 @@ nnoremap <silent> <Leader>l :Lines<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \ "rg --column --line-number --no-heading --color=always --smart-case " .
+  \ <q-args>, 1, fzf#vim#with_preview(), <bang>0)
+
 
 " .............................................................................
 " scrooloose/nerdtree

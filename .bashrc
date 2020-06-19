@@ -43,9 +43,9 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Enable chruby.
-#   Requires: https://github.com/postmodern/chruby
-source /usr/local/share/chruby/chruby.sh
+# Enable asdf to manage various programming runtime versions.
+#   Requires: https://asdf-vm.com/#/
+source "$HOME"/.asdf/asdf.sh
 
 # Enable a better reverse search experience.
 #   Requires: https://github.com/junegunn/fzf (to use fzf in general)
@@ -53,18 +53,18 @@ source /usr/local/share/chruby/chruby.sh
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 
-# WSL (Windows Subsystem for Linux) specific settings.
+# WSL 2 specific settings.
+if grep -q "microsoft" /proc/version &>/dev/null; then
+    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+    export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
+fi
+
+# WSL 1 specific settings.
 if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-    # Adjustments for WSL's file / folder permission metadata.
     if [ "$(umask)" = "0000" ]; then
-      umask 0022
+        umask 0022
     fi
 
-    # Access local X-server with VcXsrv.
-    #   Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=:0
-
-    # Configure the Docker CLI to use the Docker for Windows daemon.
-    #   Requires: https://docs.docker.com/docker-for-windows/install/
-    export DOCKER_HOST=tcp://localhost:2375
 fi
