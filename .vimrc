@@ -469,14 +469,14 @@ command! -bang -nargs=* Rg
 " .............................................................................
 " scrooloose/nerdtree
 " .............................................................................
-"
-"let g:NERDTreeShowHidden=1
-"let g:NERDTreeAutoDeleteBuffer=1
-"let g:NERDTreeQuitOnOpen=0
-"
-"" Open nerd tree at the current file or close nerd tree if pressed again.
-"nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-"
+
+let g:NERDTreeShowHidden=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeQuitOnOpen=0
+
+" Open nerd tree at the current file or close nerd tree if pressed again.
+nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+
 " .............................................................................
 " unblevable/quick-scope
 " .............................................................................
@@ -572,8 +572,8 @@ nmap <silent> t<C-g> :TestVisit<CR>
 "set laststatus=2
 
 " enable 256 colors
-"set t_Co=256
-"set t_ut=
+" set t_Co=256
+" set t_ut=
 
 " turn on line numbering
 "set number
@@ -633,7 +633,7 @@ set foldmethod=indent
 set foldlevel=99
 
 " wrap toggle
-setlocal nowrap
+setlocal wrap
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 function ToggleWrap()
     if &wrap
@@ -679,28 +679,28 @@ nmap <leader>x :bd<CR>
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " file browser
-let NERDTreeIgnore=['\.pyc$', '__pycache__']
-let g:nerdtree_open = 0
-map <leader>n :call NERDTreeToggle()<CR>
-function NERDTreeToggle()
-    NERDTreeTabsToggle
-    if g:nerdtree_open == 1
-        let g:nerdtree_open = 0
-    else
-        let g:nerdtree_open = 1
-        wincmd p
-    endif
-endfunction
+"let NERDTreeIgnore=['\.pyc$', '__pycache__']
+"let g:nerdtree_open = 0
+"map <leader>n :call NERDTreeToggle()<CR>
+"function NERDTreeToggle()
+"    NERDTreeTabsToggle
+"    if g:nerdtree_open == 1
+"        let g:nerdtree_open = 0
+"    else
+"        let g:nerdtree_open = 1
+"        wincmd p
+"    endif
+"endfunction
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-map <leader>s :SyntasticCheck<CR>
-map <leader>d :SyntasticReset<CR>
-map <leader>e :lnext<CR>
-map <leader>r :lprev<CR>
+map <leader>a :SyntasticCheck<CR>
+"map <leader>d :SyntasticReset<CR>
+"map <leader>e :lnext<CR>
+"map <leader>r :lprev<CR>
 
 " tag list
 map <leader>t :TagbarToggle<CR>
